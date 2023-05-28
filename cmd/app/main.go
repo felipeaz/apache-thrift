@@ -20,7 +20,7 @@ func main() {
 
 	handler.ApiVersion = myapp.Int(ApiVersion)
 
-	if err := server.RunServer(*addr, false); err != nil {
+	if err := server.RunServer(*addr); err != nil {
 		log.Println("error running thrift server: ", err)
 	}
 }

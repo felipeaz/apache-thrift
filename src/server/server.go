@@ -7,7 +7,7 @@ import (
 	"log"
 )
 
-func RunServer(addr string, secure bool) error {
+func RunServer(addr string) error {
 	transport, err := thrift.NewTServerSocket(addr)
 	if err != nil {
 		return err
