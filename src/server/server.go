@@ -7,16 +7,22 @@ import (
 	"log"
 )
 
-func RunServer(transportFactory thrift.TTransportFactory, protocolFactory thrift.TProtocolFactory, addr string, secure bool) error {
+func RunServer(addr string, secure bool) error {
 	transport, err := thrift.NewTServerSocket(addr)
 	if err != nil {
 		return err
 	}
 
-	usrHandler := handler.NewUserHandler()
-	processor := myapp.NewUserServiceProcessor(usrHandler)
+	processor := buildProcessor()
+	transportFactory := thrift.NewTBufferedTransportFactory(8192)
+	protocolFactory := thrift.NewTCompactProtocolFactoryConf(&thrift.TConfiguration{})
 	server := thrift.NewTSimpleServer4(processor, transport, transportFactory, protocolFactory)
 
 	log.Printf("Starting simple thrift server on: %s\n", addr)
 	return server.Serve()
+}
+
+func buildProcessor() *myapp.UserServiceProcessor {
+	usrHandler := handler.NewUserHandler()
+	return myapp.NewUserServiceProcessor(usrHandler)
 }

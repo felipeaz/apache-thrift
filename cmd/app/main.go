@@ -7,7 +7,6 @@ import (
 	"apache-thrift/src/handler"
 	"apache-thrift/src/server"
 	"apache-thrift/src/thrift-rpc/myapp"
-	"github.com/apache/thrift/lib/go/thrift"
 )
 
 var (
@@ -21,10 +20,7 @@ func main() {
 
 	handler.ApiVersion = myapp.Int(ApiVersion)
 
-	transportFactory := thrift.NewTBufferedTransportFactory(8192)
-	protocolFactory := thrift.NewTCompactProtocolFactory()
-
-	if err := server.RunServer(transportFactory, protocolFactory, *addr, false); err != nil {
+	if err := server.RunServer(*addr, false); err != nil {
 		log.Println("error running thrift server: ", err)
 	}
 }
