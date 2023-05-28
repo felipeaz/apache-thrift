@@ -24,3 +24,4 @@ Open another terminal tab and run
 
 This command will send a request to the RPC server
 
+<img width="1162" alt="Screenshot 2023-05-28 at 10 23 30 AM" src="https://github.com/felipeaz/apache-thrift/assets/32846823/3653fc80-cd46-4e80-85b3-cd0ed07779c7">
